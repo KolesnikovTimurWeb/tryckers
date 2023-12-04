@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+   <title>Перевозки </title>
+
+   <link rel="stylesheet" href="./css/swiper-bundle2.min.css">
+   <link rel="stylesheet" href="./css/style.css">
+
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+   <style>
+      .global-form input {
+         width: 100%;
+      }
+
+      .global-form .div-cordin {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 10px;
+      }
+   </style>
+</head>
+
+<body>
+
+   <main>
+
+
+      <section class="section register">
+         <div class="logo">
+            <img src="./img/logo.svg" alt="">
+         </div>
+
+         <form class="register-container login-container active container">
+            <h1>Личный Кабинет</h1>
+            <input type="text" name="login" placeholder="Логин:">
+            <input type="password" name="password" placeholder="Пароль:">
+            <p class="error-form">Error Password or login</p>
+            <div class="register-buttons">
+               <button type="submit">Войти</button>
+               <a class="button-second button-register">Регистрация</a>
+            </div>
+         </form>
+         <form class="register-container register-block container">
+            <div class="register-back">
+               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="24" viewBox="0 0 42 24" fill="none">
+                  <path
+                     d="M0.939339 10.9393C0.353554 11.5251 0.353554 12.4749 0.939339 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 10.4853 1.3934L0.939339 10.9393ZM42 10.5L2 10.5V13.5L42 13.5V10.5Z"
+                     fill="#A52221" fill-opacity="0.8" />
+               </svg>
+            </div>
+            <h1>Регистрация</h1>
+            <input class="name-vehichal" required type="text" placeholder="ФИО">
+            <input type="password" placeholder="Гос номер ">
+            <input type="text" required name="login" placeholder="Логин ">
+            <input type="text" required name="password" placeholder="Пароль ">
+            <input type="text" placeholder="Подтверждение пароля  ">
+            <div class="register-buttons">
+               <button>Регистрация</button>
+            </div>
+         </form>
+
+         <div style="width: 100%;" class="global">
+            <h1>Заполнение данных </h1>
+            <div class="global-block container">
+               <h2>Данные о разрешении</h2>
+               <form class="global-form">
+                  <input type="text" required class="allownumber-vehichal" placeholder="№ Разрешения:">
+                  <input type="text" class="date-vehichal" placeholder="Дата оформления:">
+                  <input type="text" class="organ-vehichal" placeholder="Уполномоченный орган:">
+                  <input type="text" class="statusllow-vehichal" placeholder="Статус разрешения:">
+
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Схема ТС</h2>
+               <form class="global-form">
+                  <input type="text" class="vehichal-1-vehichal" placeholder="Длина автопоезда с грузом [м]">
+                  <input type="text" class="vehichal-2-vehichal" placeholder="Масса автопоезда с грузом [т]">
+                  <input type="text" class="vehichal-3-vehichal" placeholder="Высота автопоезда с грузом [м]">
+                  <input type="text" class="vehichal-4-vehichal" placeholder="Масса автопоезда без груза [т]:">
+                  <input type="text" class="vehichal-5-vehichal" placeholder="Ширина автопоезда с грузом [м]">
+                  <input type="text" class="vehichal-6-vehichal" placeholder="Длина свеса [м]">
+                  <input type="text" class="vehichal-7-vehichal" placeholder="Минимальный радиус поворота с грузом [м]">
+
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Данные о перевозчике:</h2>
+               <form class="global-form">
+                  <input type="text" required class="fullname-vehichal" placeholder="Полное наименование">
+                  <input type="text" placeholder="ФИО Генерального директора">
+                  <input type="text" placeholder="ИНН">
+                  <input type="text" placeholder="Тип заявителя">
+                  <input type="text" placeholder="ОГРН">
+                  <input type="text" placeholder="ОГРНИП">
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Контактная информация:</h2>
+               <form class="global-form">
+                  <input type="text" required class="tel-vehichal" placeholder="Мобильный телефон">
+                  <input type="text" required class="email-vehichal" placeholder="Email">
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Сведения о тягаче:</h2>
+               <form class="global-form">
+                  <input type="text" required class="markcar-vehichal" placeholder="Марка тягача">
+                  <input type="text" required class="modelcar-vehichal" placeholder="Модель тягача">
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2> Адрес регистрации:</h2>
+               <form class="global-form">
+                  <input type="text" required class="country-vehichal" placeholder="Страна регистрации">
+                  <input type="text" placeholder="Регион">
+                  <input type="text" required class="city-vehichal" placeholder="Город">
+                  <input type="text" required class="raon-vehichal" placeholder="Район">
+                  <input type="text" placeholder="Улица">
+                  <input type="text" required class="house-vehichal" placeholder="Дом">
+                  <input type="text" placeholder="Строение">
+                  <input type="text" required class="numberhouse-vehichal" placeholder="Квартира">
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Сведения о грузе:</h2>
+               <form class="global-form">
+                  <input type="text" placeholder="Тип груза">
+                  <input type="text" required class="name-track-vehichal" placeholder="Наименование груза ">
+                  <input type="number" required class="weight-vehichal" placeholder="Масса (т)">
+                  <input type="number" required class="lenght-vehichal" placeholder="Длинна (м)">
+                  <input type="number" required class="width-vehichal" placeholder="Ширина, (м)">
+                  <input type="number" required class="height-vehichal" placeholder="Высота (м)">
+                  <input type="text" placeholder="ОГРНИП">
+               </form>
+
+            </div>
+            <div class="global-block container">
+               <h2>Параметры перевозки</h2>
+               <form class="global-form">
+
+                  <input type="text" class="start-date-vehichal" placeholder="Дата начала перевозки">
+                  <input type="text" class="type-of-truck-vehichal" placeholder="Вид перевозки">
+                  <input type="text" class="finish-date-vehichal" placeholder="Дата начала перевозки">
+                  <input type="text" class="counttrips-vehichal" placeholder="Количество поездок">
+
+               </form>
+
+            </div>
+            <div class="global-block container">
+               <h2>Маршут:</h2>
+               <form class="global-form">
+                  <div class="div-cordin">
+                     <input type="number" required class="map-x-1" placeholder="Кординаты">
+                     <input type="number" required class="map-y-1" placeholder="Кординаты">
+                  </div>
+                  <div class="div-cordin">
+                     <input type="number" required class="map-x-2" placeholder="Кординаты">
+                     <input type="number" required class="map-y-2" placeholder="Кординаты">
+                  </div>
+                  <div class="div-cordin">
+                     <input type="number" required class="map-x-3" placeholder="Кординаты">
+                     <input type="number" required class="map-y-3" placeholder="Кординаты">
+                  </div>
+                  <div class="div-cordin">
+                     <input type="number" required class="map-x-4" placeholder="Кординаты">
+                     <input type="number" required class="map-y-4" placeholder="Кординаты">
+                  </div>
+                  <div class="div-cordin">
+                     <input type="number" required class="map-x-5" placeholder="Кординаты">
+                     <input type="number" required class="map-y-5" placeholder="Кординаты">
+                  </div>
+                  <div class="div-cordin">
+                     <input type="number" required class="map-x-6" placeholder="Кординаты">
+                     <input type="number" required class="map-y-6" placeholder="Кординаты">
+                  </div>
+               </form>
+
+
+            </div>
+            <div class="global-block container">
+               <h2>Города:</h2>
+               <form class="global-form">
+                  <input type="text" required class="name-city-1" placeholder="Город 1">
+                  <input type="text" required class="name-city-2" placeholder="Город 2">
+                  <input type="text" required class="name-city-3" placeholder="Город 3">
+
+               </form>
+
+               <a class="red-button" href="./pdf.html">Перейти</a>
+            </div>
+         </div>
+      </section>
+
+   </main>
+
+</body>
+<script src="./js/main.js"></script>
+
+</html>

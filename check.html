@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+   <title>Перевозки</title>
+
+   <link rel="stylesheet" href="./css/swiper-bundle2.min.css">
+   <link rel="stylesheet" href="./css/style.css">
+   <link rel='stylesheet' href='https://unpkg.com/maplibre-gl/dist/maplibre-gl.css' />
+   <script src='https://unpkg.com/maplibre-gl/dist/maplibre-gl.js'></script>
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+   .global {
+      background-color: #fff !important;
+   }
+
+   .register {
+      background-color: #fff !important;
+
+   }
+
+   .div-map #map {
+      margin-top: 0;
+   }
+
+   .div-map .global-form {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: left;
+   }
+
+   .div-map {
+      width: 100%;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 25% 75%;
+   }
+
+   .div-map-block .global-form {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .global-img {
+      margin-top: 40px;
+      width: 100%;
+
+   }
+
+   @media screen and (max-width:1440px) {
+      .global-img {
+         overflow: scroll;
+      }
+   }
+
+
+
+   .global-img img {
+      max-width: none;
+   }
+
+   header {
+      position: relative;
+   }
+
+   .section {
+      padding: 50px 0;
+   }
+
+   .map-dev p {
+      font-size: 12px;
+      color: #00000061 !important;
+      border-radius: 10px;
+      font-weight: 400 !important;
+   }
+
+   .map-dev {
+      flex-direction: column;
+      background: #f5f5f5;
+      border: 1px solid #f5f5f5;
+      width: 100%;
+      padding: 20px;
+      border-radius: 5px;
+      height: 150px;
+      overflow-y: scroll;
+
+   }
+
+   .global-block {
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+   }
+
+   .global-block h2 {
+      margin-top: 0;
+      color: #000000de;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+      margin-right: auto;
+   }
+
+   .global-form input {
+      background: #202d3f0d !important;
+      color: #000;
+      width: 100%;
+   }
+
+   .global-text {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-top: 20px;
+
+   }
+
+   .global-text p {
+      color: #000;
+      width: 100%;
+      margin-bottom: .4rem;
+      font-weight: 600;
+      font-size: 12px;
+   }
+
+   .global-text input {
+      background: transparent !important;
+      color: #000;
+      width: 100%;
+   }
+
+   .global-dev p {
+      color: #000;
+      margin-bottom: .4rem;
+      font-weight: 600;
+      font-size: 12px;
+   }
+
+   .global-decr {
+      flex-direction: column;
+      background: #f5f5f5;
+      border: 1px solid #f5f5f5;
+      padding: 0.75em;
+
+   }
+
+   .global-dev h2 {
+      color: #000000de;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 140%;
+      margin-bottom: 20px;
+   }
+
+   .global-decr p {
+      display: flex;
+      font-size: 12px;
+      color: #00000061;
+      border-radius: 10px;
+   }
+
+   .logo {
+      display: none;
+   }
+
+   .header-div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: end;
+   }
+
+   .header-button {
+      background-color: #0a39c2;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      height: 48px;
+      border-color: transparent;
+      display: flex;
+      padding: 2px 10px;
+      align-items: center;
+   }
+
+   .header-svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #0a39c226;
+      border: 0;
+      border-radius: 8px;
+      height: 48px;
+      width: 48px;
+   }
+
+   @media screen and (max-width:500px) {
+      .global-text {
+         flex-direction: column;
+      }
+
+      .div-map {
+         grid-template-columns: 1fr;
+      }
+
+      .div-map .global-dev {
+         width: 100%;
+      }
+
+      .div-map-block {
+         order: -1;
+      }
+
+      .global-block h2,
+      .global-form input {
+         font-size: 12px;
+      }
+
+      .global-dev p {
+         font-size: 10px;
+      }
+   }
+</style>
+
+<body>
+   <header>
+      <div class="container">
+         <div class="header-div">
+            <div class="header-svg">
+               <svg _ngcontent-bpi-c124="" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path _ngcontent-bpi-c124="" fill-rule="evenodd" clip-rule="evenodd"
+                     d="M12.41 16.59L11 18L5 12L11 6L12.41 7.41L8.82782 11H19V13H8.82782L12.41 16.59Z" fill="#7F9BAE">
+                  </path>
+               </svg>
+            </div>
+
+            <div class="header-button">
+               свернуть все
+            </div>
+         </div>
+      </div>
+   </header>
+   <main>
+
+
+      <section class="section register">
+         <div class="logo">
+            <img src="./img/logo.svg" alt="">
+         </div>
+
+
+         <div style="width: 100%;" class="global active">
+            <div class="global-block container">
+               <h2>Данные о разрешении</h2>
+               <form style="width: 100%;">
+                  <div class="global-text">
+                     <p>№ Разрешения:</p>
+                     <input type="text" class="allownumber-vehichal" placeholder="02.12.2021">
+
+                  </div>
+                  <div class="global-text">
+                     <p>Дата оформления: </p>
+                     <input type="text" class="date-vehichal" placeholder="02.12.2021">
+
+                  </div>
+                  <div class="global-text">
+                     <p>Уполномоченный орган:</p>
+                     <input type="text" class="organ-vehichal" placeholder="">
+
+                  </div>
+                  <div class="global-text">
+                     <p>Статус разрешения:</p>
+                     <input type="text" class="statusllow-vehichal" placeholder="Выдано">
+
+                  </div>
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Данные о перевозчике:</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Полное наименование</p>
+                     <input type="text" class="fullname-vehichal" placeholder="Полное наименование">
+
+                  </div>
+                  <div class="global-dev">
+                     <p>ФИО Генерального директора</p>
+                     <input type="text" placeholder="ФИО Генерального директора">
+
+
+                  </div>
+                  <div class="global-dev">
+                     <p>ИНН</p>
+                     <input type="text" placeholder="ИНН">
+                  </div>
+                  <div class="global-dev">
+                     <p>Тип заявителя</p>
+                     <input type="text" placeholder="Тип заявителя">
+                  </div>
+                  <div class="global-dev">
+                     <p>ОГРН</p>
+                     <input type="text" placeholder="ОГРН">
+                  </div>
+                  <div class="global-dev">
+                     <p>ОГРНИП</p>
+                     <input type="text" placeholder="ОГРНИП">
+                  </div>
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Контактная информация:</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Телефон</p>
+                     <input type="text" class="tel-vehichal" placeholder="Телефон">
+                  </div>
+                  <div class="global-dev">
+                     <p>Email</p>
+                     <input type="text" class="email-vehichal" placeholder="Email">
+                  </div>
+               </form>
+            </div>
+
+            <div class="global-block container">
+               <h2> Адрес регистрации:</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Страна регистрации</p>
+                     <input type="text" class="country-vehichal" placeholder="Страна регистрации">
+                  </div>
+                  <div class="global-dev">
+                     <p>Регион</p>
+                     <input type="text" placeholder="Регион">
+                  </div>
+                  <div class="global-dev">
+                     <p>Город</p>
+                     <input type="text" class="city-vehichal" placeholder="Город">
+                  </div>
+                  <div class="global-dev">
+                     <p>Район</p>
+                     <input type="text" class="raon-vehichal" placeholder="Район">
+                  </div>
+                  <div class="global-dev">
+                     <p>Улица</p>
+                     <input type="text" placeholder="Улица">
+                  </div>
+                  <div class="global-dev">
+                     <p>Дом</p>
+                     <input type="text" class="house-vehichal" placeholder="Дом">
+                  </div>
+                  <div class="global-dev">
+                     <p>Строение</p>
+                     <input type="text" placeholder="Строение">
+                  </div>
+                  <div class="global-dev">
+                     <p>Квартира</p>
+                     <input type="text" class="numberhouse-vehichal" placeholder="Квартира">
+                  </div>
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Сведения о тягаче:</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Марка тягача</p>
+                     <input type="text" class="markcar-vehichal" placeholder="Марка тягача">
+                  </div>
+                  <div class="global-dev">
+                     <p>Модель тягача</p>
+                     <input type="text" class="modelcar-vehichal" placeholder="Модель тягача">
+                  </div>
+               </form>
+            </div>
+
+            <div class="global-block container">
+               <h2>Сведения о грузе:</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Тип груза</p>
+                     <input type="text" placeholder="Тип груза">
+                  </div>
+                  <div class="global-dev">
+                     <p>Наименование груза</p>
+                     <input type="text" class="name-track-vehichal" placeholder="Наименование груза ">
+                  </div>
+                  <div class="global-dev">
+                     <p>Масса (т)</p>
+                     <input type="number" class="weight-vehichal" placeholder="Масса (т)">
+                  </div>
+                  <div class="global-dev">
+                     <p>Длинна (м)</p>
+                     <input type="number" class="lenght-vehichal" placeholder="Длинна (м)">
+                  </div>
+                  <div class="global-dev">
+                     <p>Ширина (м)</p>
+                     <input type="number" class="width-vehichal" placeholder="Ширина, (м)">
+                  </div>
+                  <div class="global-dev">
+                     <p>Высота (м)</p>
+                     <input type="number" class="height-vehichal" placeholder="Высота (м)">
+                  </div>
+                  <div class="global-dev">
+                     <p>ОГРНИП</p>
+                     <input type="text" placeholder="ОГРНИП">
+                  </div>
+
+
+               </form>
+
+            </div>
+            <div class="global-block container">
+               <h2>Параметры перевозки:</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Дата начала перевозки:</p>
+                     <input type="text" class="start-date-vehichal" placeholder="Дата начала перевозки">
+                  </div>
+                  <div class="global-dev">
+                     <p>Вид перевозки:</p>
+                     <input type="text" class="type-of-truck-vehichal" placeholder="">
+                  </div>
+                  <div class="global-dev">
+                     <p>Дата окончания перевозки:</p>
+                     <input type="text" class="finish-date-vehichal" placeholder="Дата окончания перевозки">
+                  </div>
+                  <div class="global-dev">
+                     <p>
+                        Количество поездок:</p>
+                     <input type="text" class="counttrips-vehichal" placeholder="Количество поездок">
+                  </div>
+               </form>
+            </div>
+            <div class="global-block container">
+               <h2>Схема ТС</h2>
+               <form class="global-form">
+                  <div class="global-dev">
+                     <p>Длина автопоезда с грузом [м]:</p>
+                     <input type="text" class="vehichal-1-vehichal" placeholder="">
+                  </div>
+                  <div class="global-dev">
+                     <p>Масса автопоезда с грузом [т]</p>
+                     <input type="text" class="vehichal-2-vehichal" placeholder="">
+                  </div>
+                  <div class="global-dev">
+                     <p>Высота автопоезда с грузом [м]</p>
+                     <input type="text" class="vehichal-3-vehichal" placeholder="">
+                  </div>
+
+                  <div class="global-dev">
+                     <p>
+                        Масса автопоезда без груза [т]:</p>
+                     <input type="text" class="vehichal-4-vehichal" placeholder="">
+                  </div>
+                  <div class="global-dev">
+                     <p>
+                        Ширина автопоезда с грузом [м] </p>
+                     <input type="text" class="vehichal-5-vehichal" placeholder="">
+                  </div>
+                  <div class="global-dev">
+                     <p>
+                        Длина свеса [м] </p>
+                     <input type="text" class="vehichal-6-vehichal" placeholder="">
+                  </div>
+                  <div class="global-dev">
+                     <p>
+                        Минимальный радиус поворота с грузом [м] </p>
+                     <input type="text" class="vehichal-7-vehichal" placeholder="">
+                  </div>
+               </form>
+               <div class="global-img">
+                  <img src="./img/truck.png" alt="">
+
+               </div>
+            </div>
+            <div class="global-block  container">
+
+               <h2>Маршрут движения</h2>
+               <div class="div-map">
+                  <div class="global-form">
+                     <div class="global-dev">
+                        <input type="text" class="map-x-1" placeholder="">
+                     </div>
+                     <div class="global-dev">
+                        <input type="text" class="map-x-2" placeholder="">
+                     </div>
+                     <div class="global-dev">
+                        <input type="text" class="map-x-3" placeholder="">
+                     </div>
+                     <div class="global-dev">
+                        <input type="text" class="map-x-4" placeholder="">
+                     </div>
+                     <div class="global-dev">
+                        <input type="text" class="map-x-5" placeholder="">
+                     </div>
+                     <div class="global-dev">
+                        <input type="text" class="map-x-6" placeholder="">
+                     </div>
+                  </div>
+                  <div class="div-map-block">
+
+                     <div class="global-form">
+                        <div id="map"></div>
+
+                        <div class="global-dev map-dev">
+                           <p> 23.6 км <span class="name-city-1"></span> область</p>
+                           <p> 44 км <span class="name-city-1"></span> округ Горелово, шоссе</p>
+                           <p> 55 км <span class="name-city-1"></span> Таллинское шоссе</p>
+                           <p> 109.8 км <span class="name-city-2"></span> </p>
+                           <p> 112.8 км <span class="name-city-2"></span> область</p>
+                           <p> 125.2 км <span class="name-city-3"></span> область</p>
+                           <p> 164 км <span class="name-city-3"></span> область</p>
+                           <p> 291 км <span class="name-city-3"></span> область</p>
+                           <p> 459 км <span class="name-city-3"></span> область</p>
+                        </div>
+
+                     </div>
+                  </div>
+
+
+               </div>
+            </div>
+            <div class="global-block  container">
+
+               <div class="global-dev ">
+                  <h2>Особые условия движения</h2>
+
+                  <div class="global-decr">
+                     <p>
+                        1) Скорость движения не более 60 км/ч, по мостовым сооружениям не более 15 км/ч. 2) Запрещено
+                        осуществлять движение при гололеде, а также метеорологической видимости менее 100 м. 3)
+                        Проводить
+                        контрольный промер высоты под искусственными сооружениями. 4) Движение по искусственным
+                        сооружениям, с
+                        установленными ограничениями по полной массе, осуществлять в одиночном порядке. 5) Наличие
+                        сигнальных
+                        и габаритных огней.
+                     </p>
+                     <p> Департамент транспорта и дорожного хозяйства ам образования город Краснодара:
+                        Рекомендованное время для движения крупногабаритного и(или) тяжеловесного транспорта с 22.00 до
+                        06.00
+                        ч.</p>
+                     <p> ООО "Магистраль двух столиц":
+                        1. О проезде на предстоящую неделю необходимо направить сообщение Оператору ЦУДД в срок до
+                        четверга
+                        текущей недели по электронной почте tmcom11s7@nho-m11.ru. В сообщении необходимо указать дату и
+                        время
+                        заезда и выезда заявленного транспортного средства;
+                        2. Перед въездом на пункт взимания платы необходимо заблаговременно перестроиться в крайнюю
+                        правую
+                        полосу дороги. Проезд через пункт взимания платы необходимо осуществлять только через крайнюю
+                        правую
+                        полосу, предназначенную для негабаритного транспорта;
+                        3. Проезд через пользовательские развороты на участке от км 684 (развязка с КАД) до км 543
+                        Скоростной
+                        автомобильной дороги М-11 Москва – Санкт-Петербург ЗАПРЕЩЕН;
+                        4. Перед заездом на участок Скоростной автомобильной дороги М-11 Москва – Санкт-Петербург,
+                        находящийся
+                        в ведении ООО "МАГИСТРАЛЬ ДВУХ СТОЛИЦ", необходимо оповестить Оператора ЦУДД по телефонам:
+                        +7812-646-66-77, +7921-408-45-68.
+
+                     </p>
+                     <p>
+                        1. Скорость движения не более 60 км/ч, движение по мостам и путепроводам со скоростью не более
+                        15
+                        км/час.
+                        2. Контрольный промер габаритов под путепроводами и другими искусственными сооружениями.
+                        3. При метеорологической видимости менее 100 м и гололеде движение запрещено.
+                     </p>
+                     <p> Министерство Транспорта Ростовской области:
+                        Движение по мостам и путепроводам осуществлять в одиночном порядке по оси со скоростью не более
+                        10
+                        км/ч, в сопровождении автомобиля прикрытия.
+                        Движение по маршруту осуществлять согласно ПОДД.
+                     </p>
+                     <p> Движение по мостам и п/п со скоростью 15 км/ч.
+                        Осуществлять контрольный промер габарита высоты под искусственными сооружениями.
+                        При наличии весовых и габаритных ограничений в заявленный период движение АТС на указанных
+                        участках
+                        а/д, в случае превышения установленных ограничений, запрещено.
+                     </p>
+                     <p>
+                        1. Движение по мостам и путепроводам со скоростью не более 15 км/час.
+                        2. Проводить контрольный промер габаритов по высоте под путепроводами и другими инженерными
+                        коммуникациями (ЛЭП и т.п.).
+                        3. При метеорологической видимости менее 100 м движение запрещено.
+                        4. Движение осуществлять согласно требованиям Приказа Минтранса от 31.08.2020г. №343
+                        5. На участках проведения ремонтных работ движение осуществлять с соблюдением требований
+                        временных
+                        технических средств организации дорожного движения.
+                        6. Заблаговременно убедиться в отсутствии ограничений в движении автотранспортных средств по
+                        федеральным автомобильным дорогам ФКУ Упрдор Москва-Волгоград на сайте http://www.msk-vlg.ru.
+                     </p>
+                  </div>
+
+               </div>
+            </div>
+            <div class="global-block  container">
+
+               <div class="global-dev ">
+                  <h2>Особые условия по согласованию ГИБДД</h2>
+
+                  <div class="global-decr">
+                     <p>Движение по городу Санкт-Петербургу с 10ч. 00мин. до 16ч. 00мин. и с 21ч. 00мин. до 07ч. 00мин.
+                        В целях обеспечения безопасности дорожного движения на участках дорог, где требуется движение по
+                        полосе встречного движения предусмотренным проектом организации дорожного движения,
+                        целесообразно использовать сопровождение патрульным а/м ГИБДД.
+                        Проводить контрольный промер высот под искусственными сооружениями, линии ЛЭП.
+                        Скорость движения не более 60 км/ч., мостовым сооружениям не более 15 км/ч.
+                        Запрещено осуществлять движение при гололеде, а также метеорологической видимости менее 100 м.
+                        Груз и (или) оборудование, выступающее за габариты транспортного средства, обозначить в
+                        соответствии с п. 23.4 ПДД РФ.
+                        Движение осуществлять согласно правилам дорожного движения РФ и в соответствии выданных
+                        согласовании.</p>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </main>
+
+</body>
+<script>
+   let weightVehichal = localStorage.getItem('weight-vehichal')
+   let heightVehichal = localStorage.getItem('height-vehichal')
+   let lenghtVehichal = localStorage.getItem('lenght-vehichal')
+   let widthVehichal = localStorage.getItem('width-vehichal')
+   let nameTrackVehichal = localStorage.getItem('name-track-vehichal')
+   let fullnamekVehichal = localStorage.getItem('fullname-vehichal')
+   let countryVehichal = localStorage.getItem('country-vehichal')
+   let cityVehichal = localStorage.getItem('city-vehichal')
+   let raonVehichal = localStorage.getItem('raon-vehichal')
+   let houseVehichal = localStorage.getItem('house-vehichal')
+   let emailVehichal = localStorage.getItem('email-vehichal')
+   let namelVehichal = localStorage.getItem('name-vehichal')
+   let markCarlVehichal = localStorage.getItem('markcar-vehichal')
+   let modelCarlVehichal = localStorage.getItem('modelcar-vehichal')
+   let telVehichal = localStorage.getItem('tel-vehichal')
+   let allowNumber = localStorage.getItem('allownumber-vehichal')
+   let datelVehichal = localStorage.getItem('date-vehichal')
+   let organVehichal = localStorage.getItem('organ-vehichal')
+   let statusVehichal = localStorage.getItem('statusllow-vehichal')
+
+   let nameCityVehichal1 = localStorage.getItem('name-city-1')
+   let nameCityVehichal2 = localStorage.getItem('name-city-2')
+   let nameCityVehichal3 = localStorage.getItem('name-city-3')
+   document.querySelectorAll('.name-city-1').forEach(el => {
+      el.innerHTML = nameCityVehichal1
+   })
+   document.querySelectorAll('.name-city-2').forEach(el => {
+      el.innerHTML = nameCityVehichal2
+   })
+   document.querySelectorAll('.name-city-3').forEach(el => {
+      el.innerHTML = nameCityVehichal3
+   })
+
+   let startDateVehichal = localStorage.getItem('start-date-vehichal')
+   let finishDateVehichal = localStorage.getItem('finish-date-vehichal')
+   let countTripsVehichal = localStorage.getItem('counttrips-vehichal')
+   let typeofTruckVehichal = localStorage.getItem('type-of-truck-vehichal')
+
+
+   document.querySelector('.type-of-truck-vehichal').value = typeofTruckVehichal
+   document.querySelector('.counttrips-vehichal').value = countTripsVehichal
+   document.querySelector('.finish-date-vehichal').value = finishDateVehichal
+   document.querySelector('.start-date-vehichal').value = startDateVehichal
+   document.querySelector('.statusllow-vehichal').value = statusVehichal
+   document.querySelector('.organ-vehichal').value = organVehichal
+   document.querySelector('.date-vehichal').value = datelVehichal
+   document.querySelector('.allownumber-vehichal').value = allowNumber
+   document.querySelector('.tel-vehichal').value = telVehichal
+   document.querySelector('.city-vehichal').value = cityVehichal
+   document.querySelector('.markcar-vehichal').value = markCarlVehichal
+   document.querySelector('.modelcar-vehichal').value = modelCarlVehichal
+
+   document.querySelector('.email-vehichal').value = emailVehichal
+   document.querySelector('.house-vehichal').value = houseVehichal
+   document.querySelector('.country-vehichal').value = countryVehichal
+   document.querySelector('.fullname-vehichal').value = fullnamekVehichal
+   document.querySelector('.name-track-vehichal').value = nameTrackVehichal
+   document.querySelector('.weight-vehichal').value = weightVehichal
+   document.querySelector('.lenght-vehichal').value = lenghtVehichal
+   document.querySelector('.width-vehichal').value = widthVehichal
+   document.querySelector('.height-vehichal').value = heightVehichal
+   document.querySelector('.raon-vehichal').value = raonVehichal
+   let inputs = document.querySelectorAll('input')
+   inputs.forEach(el => {
+
+      el.disabled = true
+   })
+
+
+   let vehichal1Text = localStorage.getItem('vehichal-1-vehichal')
+   let vehichal2Text = localStorage.getItem('vehichal-2-vehichal')
+   let vehichal3Text = localStorage.getItem('vehichal-3-vehichal')
+   let vehichal4Text = localStorage.getItem('vehichal-4-vehichal')
+   let vehichal5Text = localStorage.getItem('vehichal-5-vehichal')
+   let vehichal6Text = localStorage.getItem('vehichal-6-vehichal')
+   let vehichal7Text = localStorage.getItem('vehichal-7-vehichal')
+   document.querySelector('.vehichal-1-vehichal').value = vehichal1Text
+   document.querySelector('.vehichal-2-vehichal').value = vehichal2Text
+   document.querySelector('.vehichal-3-vehichal').value = vehichal3Text
+   document.querySelector('.vehichal-4-vehichal').value = vehichal4Text
+   document.querySelector('.vehichal-5-vehichal').value = vehichal5Text
+   document.querySelector('.vehichal-6-vehichal').value = vehichal6Text
+   document.querySelector('.vehichal-7-vehichal').value = vehichal7Text
+
+   let map1X = localStorage.getItem('map-x-1')
+   let map2X = localStorage.getItem('map-x-2')
+   let map3X = localStorage.getItem('map-x-3')
+   let map4X = localStorage.getItem('map-x-4')
+   let map5X = localStorage.getItem('map-x-5')
+   let map6X = localStorage.getItem('map-x-6')
+   let map1Y = localStorage.getItem('map-y-1')
+   let map2Y = localStorage.getItem('map-y-2')
+   let map3Y = localStorage.getItem('map-y-3')
+   let map4Y = localStorage.getItem('map-y-4')
+   let map5Y = localStorage.getItem('map-y-5')
+   let map6Y = localStorage.getItem('map-y-6')
+   document.querySelector('.map-x-1').value = `${map1X} , ${map1Y}`
+   document.querySelector('.map-x-2').value = `${map2X} , ${map2Y}`
+   document.querySelector('.map-x-3').value = `${map3X} , ${map3Y}`
+   document.querySelector('.map-x-4').value = `${map4X} , ${map4Y}`
+   document.querySelector('.map-x-5').value = `${map5X} , ${map5Y}`
+   document.querySelector('.map-x-6').value = `${map6X} , ${map6Y}`
+
+
+
+   const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://api.maptiler.com/maps/30136180-41b3-4b46-8c39-f37f95e16e18/style.json?key=xSPWILBLkNJBdAg3hKnc',
+      center: [58.088886, 56.425602],
+      zoom: 4
+   });
+
+   map.on('load', () => {
+      map.addSource('lines', {
+         'type': 'geojson',
+         'data': {
+            'type': 'FeatureCollection',
+            'features': [
+               {
+                  'type': 'Feature',
+                  'properties': {
+                     'color': '#0a39c2' // red
+                  },
+                  'geometry': {
+                     'type': 'LineString',
+                     'coordinates': [
+                        [map1X, map1Y],
+                        [map2X, map2Y],
+                        [map3X, map3Y],
+                        [map4X, map4Y],
+                        [map5X, map5Y],
+                        [map6X, map6Y],
+                     ]
+                  }
+               },
+               {
+                  'type': 'Feature',
+                  'properties': {
+                     'color': '#0a39c2' // blue
+                  },
+                  'geometry': {
+                     'type': 'LineString',
+                     'coordinates': [
+                        [-122.48393028974533, 37.829471820141016],
+                        [-122.48395174741744, 37.82940826466351],
+                        [-122.48395174741744, 37.829412501697064],
+                        [-122.48423874378203, 37.829357420242125],
+                        [-122.48422533273697, 37.829361657278575],
+                        [-122.48459815979002, 37.8293425906126],
+                        [-122.48458743095398, 37.8293447091313],
+                        [-122.4847564101219, 37.82932776098012],
+                        [-122.48474299907684, 37.829331998018276],
+                        [-122.4849334359169, 37.829298101706186],
+                        [-122.48492807149889, 37.82930022022615],
+                        [-122.48509705066681, 37.82920488676767],
+                        [-122.48509168624878, 37.82920912381288],
+                        [-122.48520433902739, 37.82905870855876],
+                        [-122.48519897460936, 37.82905870855876],
+                        [-122.4854403734207, 37.828594749716714],
+                        [-122.48543500900269, 37.82860534241688],
+                        [-122.48571664094925, 37.82808206121068],
+                        [-122.48570591211319, 37.82809689109353],
+                        [-122.4858346581459, 37.82797189627337],
+                        [-122.48582661151886, 37.82797825194729],
+                        [-122.4859634041786, 37.82788503534145],
+                        [-122.48595803976059, 37.82788927246246],
+                        [-122.48605459928514, 37.82786596829394]
+                     ]
+                  }
+               }
+            ]
+         }
+      });
+      map.addLayer({
+         'id': 'lines',
+         'type': 'line',
+         'source': 'lines',
+         'paint': {
+            'line-width': 3,
+            // Use a get expression (https://maplibre.org/maplibre-style-spec/expressions/#get)
+            // to set the line-color to a feature property value.
+            'line-color': ['get', 'color']
+         }
+      });
+   });
+</script>
+
+</html>

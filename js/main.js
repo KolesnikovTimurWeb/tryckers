@@ -201,5 +201,66 @@ inputs.forEach(el => {
       if (el.classList.value.includes("vehichal-7-vehichal")) {
          localStorage.setItem("vehichal-7-vehichal", el.value)
       }
+
+      if (el.classList.value.includes("number-picture-1")) {
+         localStorage.setItem("number-picture-1", el.value)
+      }
+      if (el.classList.value.includes("number-picture-2")) {
+         localStorage.setItem("number-picture-2", el.value)
+      }
+      if (el.classList.value.includes("number-picture-3")) {
+         localStorage.setItem("number-picture-3", el.value)
+      }
+      if (el.classList.value.includes("number-picture-4")) {
+         localStorage.setItem("number-picture-4", el.value)
+      }
+      if (el.classList.value.includes("number-picture-5")) {
+         localStorage.setItem("number-picture-5", el.value)
+      }
+      if (el.classList.value.includes("number-picture-6")) {
+         localStorage.setItem("number-picture-6", el.value)
+      }
+      if (el.classList.value.includes("number-picture-7")) {
+         localStorage.setItem("number-picture-7", el.value)
+      }
+      if (el.classList.value.includes("number-picture-8")) {
+         localStorage.setItem("number-picture-8", el.value)
+      }
+      if (el.classList.value.includes("number-picture-9")) {
+         localStorage.setItem("number-picture-9", el.value)
+      }
+      if (el.classList.value.includes("number-picture-10")) {
+         localStorage.setItem("number-picture-10", el.value)
+      }
+      if (el.classList.value.includes("number-picture-11")) {
+         localStorage.setItem("number-picture-11", el.value)
+      }
+      if (el.classList.value.includes("number-picture-12")) {
+         localStorage.setItem("number-picture-12", el.value)
+      }
+      if (el.classList.value.includes("number-picture-13")) {
+         localStorage.setItem("number-picture-13", el.value)
+      }
+      if (el.classList.value.includes("number-picture-14")) {
+         localStorage.setItem("number-picture-14", el.value)
+      }
+      if (el.classList.value.includes("number-picture-15")) {
+         localStorage.setItem("number-picture-15", el.value)
+      }
+      if (el.classList.value.includes("number-picture-16")) {
+         localStorage.setItem("number-picture-16", el.value)
+      }
+      if (el.classList.value.includes("number-picture-17")) {
+         localStorage.setItem("number-picture-17", el.value)
+      }
+      if (el.classList.value.includes("number-picture-18")) {
+         localStorage.setItem("number-picture-18", el.value)
+      }
+      if (el.classList.value.includes("number-picture-19")) {
+         localStorage.setItem("number-picture-19", el.value)
+      }
+      if (el.classList.value.includes("number-picture-20")) {
+         localStorage.setItem("number-picture-20", el.value)
+      }
    })
 })
